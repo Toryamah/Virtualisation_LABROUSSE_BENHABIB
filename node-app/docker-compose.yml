@@ -1,0 +1,43 @@
+version: '3'
+services:
+  nodejs-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile_Main
+    ports:
+      - "3000:3000"
+    container_name: myapp_main
+    volumes:
+       - ./:/usr/src/app/
+       - /usr/src/app/node_modules
+  nodejs-languages:
+    build:
+      context: ./
+      dockerfile: Dockerfile_languages
+    ports:
+      - "3001:3001"
+    container_name: myapp_languages
+    volumes:
+       - ./:/usr/src/app/
+       - /usr/src/app/node_modules
+   nodejs-users:
+    build:
+      context: ./
+      dockerfile: Dockerfile_Users
+    ports:
+      - "3002:3002"
+    container_name: myapp_users
+    volumes:
+       - ./:/usr/src/app/
+       - /usr/src/app/node_modules
+       
+  vue-ui:
+    build:
+      context: ./my-app
+      dockerfile: Dockerfile-dev
+    ports:
+      - "3000:3000"
+    container_name: myapp_vue
+    volumes:
+       - ./:/usr/src/app
+       - /usr/src/app/node_modules
